@@ -1,5 +1,6 @@
 name: Testing with Pytest
 run-name: Pytest
+
 on:
   push:
     branches:
@@ -8,16 +9,19 @@ on:
   pull_request:
     branches:
       - main
+      
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.8"
+          
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -36,6 +40,7 @@ jobs:
       - name: Notify on success
         if: success()
         run: echo "Tests passed successfully"
+        
       - name: Notify on failure
         if: failure()
         run: echo "Tests failed"
